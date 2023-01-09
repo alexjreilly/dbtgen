@@ -1,0 +1,11 @@
+models:
+  account:
+    unique_columns:
+      - account_id
+  campaign:
+    unique_columns:
+      - campaign_id
+      - timestamp
+  opportunity:
+    unique_columns:
+      - opportunity_id
