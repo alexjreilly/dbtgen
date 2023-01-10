@@ -1,10 +1,9 @@
-import os
-from os import path
+from os import path, getcwd
 
-MODULE_DIR = os.getcwd()
+MODULE_DIR = path.dirname(path.realpath(__file__))
 PROJECT_ROOT = path.abspath(f'{MODULE_DIR}/../../')
 
-INPUT_MODELS_DIR = path.abspath(f'{MODULE_DIR}/../models')
+INPUT_MODELS_DIR = f'{getcwd()}/.dbtgen/'
 TARGET_MODELS_DIR = path.abspath(f'{PROJECT_ROOT}/models')
 TARGET_SOURCES_DIR = path.abspath(f'{PROJECT_ROOT}/sources')
 TARGET_PACKAGE_SOURCES_DIR = path.abspath(f'{PROJECT_ROOT}/.export/sources/')
