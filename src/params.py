@@ -1,6 +1,7 @@
+import os
 from os import path
 
-MODULE_DIR = path.dirname(path.realpath(__file__))
+MODULE_DIR = os.getcwd()
 PROJECT_ROOT = path.abspath(f'{MODULE_DIR}/../../')
 
 INPUT_MODELS_DIR = path.abspath(f'{MODULE_DIR}/../models')

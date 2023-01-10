@@ -1,14 +1,32 @@
 # dbtgen
 
+NOTE: currently only working with dbt-snowflake 
 
 ## Contents
 
+- [Install](#commands)
+- [Usage](#usage)
 - [Commands](#commands)
   - [`model`](#model)
   - [`model-properties`](#model-properties)
   - [`source`](#source) 
   - [`package`](#package)
   - [`clean`](#clean)
+
+
+## Install:
+
+Make sure all requirements are installed and then install `dbtgen` like so:
+
+```
+python -m pip install -e . 
+```
+
+
+## Usage:
+
+Navigate to your dbt project working directory.
+From here, create a `.dbtgen/` folder and start adding your model templates.
 
 
 ## Commands:
@@ -30,7 +48,7 @@ The sub-commands / actions available to run with `dbtgen` are:
 ```
 
 Options:
-- `-s` (`--select`): The model/schema selected (e.g. `-s ods.ifs_pres`)
+- `-s` (`--select`): The model/schema selected (e.g. `-s staging.my_model`)
 - `-o` (`--overwrite`): Overwrite existing models in the target folder of the project
 - `-r` (`--run`): Create the model files (by default, this is not used)
 
@@ -69,7 +87,7 @@ _Example usage_
 
 ```shell
 dbtgen model
-dbtgen model -s ods.saba
+dbtgen model -s staging
 ```
 
 #### Run mode
@@ -79,8 +97,8 @@ By passing in the command line flag `-r` or `---run` will create the models in t
 _Example usage_
 
 ```shell
-dbtgen model -s ods.saba -r
-dbtgen model -s ods.saba -r -o
+dbtgen model -s staging -r
+dbtgen model -s staging -r -o
 ```
 
 
@@ -93,7 +111,7 @@ dbtgen model -s ods.saba -r -o
 ```
 
 Options:
-- `-s` (`--select`): The model/schema selected (e.g. `-s ods.ifs_pres`)
+- `-s` (`--select`): The model/schema selected (e.g. `-s staging`)
 - `-t` (`--target`): The target environment to use to generate the contents (e.g. `-t prod`). Note, by default this is the target name of the default dbt profile (e.g. `dev007`), however for generating accurate recency tests, `prod` data is recommended
 - `-uv` (`--use-views`): Whether to use view objects only
 - `-ut` (`--use-tables`): Whether to use table objects only
@@ -111,7 +129,7 @@ Model properties files are generated with file name `.dbtgen__*.yml` and are git
 _Example usage_
 
 ```shell
-dbtgen model-properties -s ods.saba_pres -uv --target prod
+dbtgen model-properties -s staging -uv --target prod
 ```
 
 ### TO DO

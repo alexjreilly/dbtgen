@@ -32,7 +32,9 @@ setup(
         "console_scripts": ["dbtgen = src.main:cli"],
     },
     install_requires=[
-        # the following are all to match snowflake-connector-python
+        "dbt-core>=1.1.0",
+        "dbt-snowflake>1.1.0",
+        "snowflake-connector-python>=2.9.0",
         "requests<3.0.0",
         "idna>=2.5,<4",
         "cffi>=1.9,<2.0.0",
