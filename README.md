@@ -1,33 +1,25 @@
-# dbtgen
+# .dbtgen
 
-NOTE: currently only working with dbt-snowflake 
 
 ## Contents
 
-- [Install](#commands)
-- [Usage](#usage)
+- [Installation](#installation)
 - [Commands](#commands)
   - [`model`](#model)
   - [`model-properties`](#model-properties)
-  - [`source`](#source) 
+  - [`source`](#source)
   - [`package`](#package)
   - [`clean`](#clean)
 
 
-## Install:
+## Installation
 
-Make sure all requirements are installed and then install `dbtgen` like so:
+The package should be installed when the setting up the virtual environment, but if not, it can be 
+installed using the following command:
 
 ```
-python -m pip install -e . 
+pip install -e .dbtgen
 ```
-
-
-## Usage:
-
-Navigate to your dbt project working directory.
-From here, create a `.dbtgen/` folder and start adding your model templates.
-
 
 ## Commands:
 
@@ -48,14 +40,13 @@ The sub-commands / actions available to run with `dbtgen` are:
 ```
 
 Options:
-- `-s` (`--select`): The model/schema selected (e.g. `-s staging.my_model`)
+- `-s` (`--select`): The model/schema selected (e.g. `-s staging`)
 - `-o` (`--overwrite`): Overwrite existing models in the target folder of the project
 - `-r` (`--run`): Create the model files (by default, this is not used)
 
 This command is used to help generate dbt model files (`.sql`) using a parameterised SQL template and model scoped variables defined in YAML. 
 
-The nested folder structure within `./.dbtgen/` represents the same structure used in the dbt models directory (`./models` by default). 
-When the application runs, it iterates through every sub-directory and checks for two types of files:
+The nested folder structure within `./.dbtgen/models/` represents the same structure used in `./models` (the default models directory for the project). When the application runs, it iterates through every sub-directory and checks for two types of files:
 
 #### Template file (`*.sql`)
 
@@ -87,12 +78,12 @@ _Example usage_
 
 ```shell
 dbtgen model
-dbtgen model -s staging
+dbtgen model -s ods.saba
 ```
 
 #### Run mode
 
-By passing in the command line flag `-r` or `---run` will create the models in the projects models directory.
+By passing in the command line flag `-r` or `--run` will create the models in the projects models directory.
 
 _Example usage_
 
@@ -111,8 +102,8 @@ dbtgen model -s staging -r -o
 ```
 
 Options:
-- `-s` (`--select`): The model/schema selected (e.g. `-s staging`)
-- `-t` (`--target`): The target environment to use to generate the contents (e.g. `-t prod`). Note, by default this is the target name of the default dbt profile (e.g. `dev007`), however for generating accurate recency tests, `prod` data is recommended
+- `-s` (`--select`): The qualified path of directory containing the models (e.g. `-s staging`)
+- `-sc` (`--schema`): The target schema in Snowflake (e.g. `-sc prod_analytics.staging`). Note, for generating accurate recency tests, `prod` data is recommended
 - `-uv` (`--use-views`): Whether to use view objects only
 - `-ut` (`--use-tables`): Whether to use table objects only
 - `-w` (`--warn-only`): Use severity warn only for all recency tests (by default, this will generate both warn and error tests)
@@ -129,7 +120,7 @@ Model properties files are generated with file name `.dbtgen__*.yml` and are git
 _Example usage_
 
 ```shell
-dbtgen model-properties -s staging -uv --target prod
+dbtgen model-properties -s staging -sc prod_analytics.staging -uv --target prod
 ```
 
 ### TO DO
@@ -145,6 +136,19 @@ Include deep merge of existing complex YAML structures, in order to overlay any 
   dbtgen source [OPTIONS]
 ```
 
+Options:
+- `-s` (`--select`): The model/schema selected (e.g. `-s raw.stripe`)
+- `-o` (`--overwrite`): Overwrite existing sources file (default=False)
+- `-t` (`--target`): The target environment to use to generate the source files (e.g. `-t prod`). Note, by default this is the target name of the default dbt profile (e.g. `dev007`)
+- `-p` (`--profile`): The dbt profile to use
+
+Generates a dbt sources file using table/views existing in a selected database and schema
+
+_Example usage_
+
+```shell
+dbtgen source -s raw.stripe -t prod
+```
 
 ---
 
