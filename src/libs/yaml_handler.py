@@ -34,7 +34,7 @@ def read_yaml_file(file_path: str) -> dict:
     :returns: Dictionary object with the YAML contents
     """
 
-    with open(file_path, 'r') as f:
-        file = f.read()
+    with open(file_path, 'rb') as f:
+        file = f.read().decode()
 
     return yaml.safe_load(file)

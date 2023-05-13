@@ -1,5 +1,6 @@
 import shutil
 from os import listdir, path, walk
+import pathlib
 
 from . import params
 from .libs import node
@@ -28,7 +29,10 @@ def generate_sources(
                 # TODO: Add ignore for .dbtgen__*.yml generated files
                 if file.endswith('.yml'):
 
-                    source_db_suffix = path.basename(root)
+                    source_db_suffix =  pathlib.Path(
+                        root.replace(input_models_dir, '')
+                    ).parts[1]
+
                     model_properties_path = path.join(sub_dir_path, file)
                     log_source_target = f"{node.namespace(sub_dir_path)}.yml"
                     
@@ -40,7 +44,7 @@ def generate_sources(
 
                     src = SourceFactory(
                         name=source_name,
-                        database=f"{{ var('SOURCES_ENV', 'PROD') }}_"
+                        database="{{ var('SOURCES_ENV', 'PROD') }}_"
                                  f"{source_db_suffix.upper()}"
                     )
                     src.from_model_properties(model_properties_path)

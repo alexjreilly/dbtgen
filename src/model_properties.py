@@ -21,17 +21,16 @@ def calculate_vars(args) -> Tuple[str, str]:
     :returns: File path for model properties file, Snowflake schema to use
     """
 
-    if len(args.select.split('.')) != 2:
+    if len(args.schema.split('.')) != 2:
         raise RuntimeError(
             'Must provide `-s` (`--select`) in the format [database].[schema]'
         )
 
-    db_suffix, schema = node.database_and_schema(args.select)
-    db = f"{args.target}_{db_suffix}"
+    db, schema = args.schema.split('.')
 
     properties_file = os.path.join(
         node.path(args.select),
-        f"{args.select.split('.')[-1]}.yml"
+        f"{args.schema.split('.')[-1]}.yml"
     )
 
     return properties_file, f"{db}.{schema}"

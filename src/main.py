@@ -12,7 +12,7 @@ def build_model_subparser(sub_parsers):
 
     sub_parser = sub_parsers.add_parser(
         "model", 
-        help='Generate model'
+        help='Generate models using .sql templates and model-scoped variables'
     )
 
     sub_parser.add_argument(
@@ -55,18 +55,18 @@ def build_model_properties_subparser(sub_parsers):
     sub_parser.add_argument(
         "-s",
         "--select",
-        help="Selected models",
+        help="Selected models path within project",
         type=str,
         default=None,
         required=True
     )
     sub_parser.add_argument(
-        "-t",
-        "--target",
-        help="Target environment",
+        "-sc",
+        "--schema",
+        help="Target schema containing models",
         type=str,
-        default=default_target(),
-        required=False
+        default=None,
+        required=True
     )
     sub_parser.add_argument(
         "-p",
@@ -127,7 +127,7 @@ def build_source_subparser(sub_parsers):
 
     sub_parser = sub_parsers.add_parser(
         "source", 
-        help="Create dbt source files"
+        help="Create dbt source files using selected {database}.{schema}"
     )
 
     sub_parser.add_argument(
@@ -188,8 +188,8 @@ def build_package_subparser(sub_parsers):
 
     sub_parser = sub_parsers.add_parser(
         "package", 
-        help="Create dbt package containing sources, generated from model" \
-            "properties files"
+        help="Create dbt package in .export/ containing sources, using model-" \
+            "properties files in the project"
     )
 
     sub_parser.set_defaults(func=package.main)

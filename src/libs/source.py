@@ -23,7 +23,7 @@ class Source:
         BaseDumper.add_representer(QuotedString, BaseDumper.quoted_scalar)
 
         self.name = name
-        
+
         self.contents = {
             'version': 2,
             'sources': [
@@ -189,7 +189,7 @@ class SourceFactory:
         :param models: Dictionary with contents of a model properties file
         :returns: loaded_at_timestamp, freshness
         """
-
+        
         recency_warn, recency_error = \
             SourceFactory._get_most_common_recency_test(
                 models['models']
@@ -289,6 +289,17 @@ class SourceFactory:
 
             if model.get('description'):
                 table['description'] = model['description']
+
+            if model.get('columns'):
+                all_columns = []
+
+                for column in model['columns']:
+                    if column.get('name'):
+                        all_columns.append({'name': column['name']})
+                    if column.get('description'):
+                        all_columns.append({'description': column['description']})
+
+                table['columns'] = all_columns
 
             s_loaded_at, s_freshness = self._get_source_model_freshness(
                 model,

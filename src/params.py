@@ -1,12 +1,15 @@
-from os import path, getcwd
+from os import path
 
 MODULE_DIR = path.dirname(path.realpath(__file__))
 PROJECT_ROOT = path.abspath(f'{MODULE_DIR}/../../')
 
-INPUT_MODELS_DIR = f'{getcwd()}/.dbtgen/'
+INPUT_MODELS_DIR = path.abspath(f'{MODULE_DIR}/../models')
+INPUT_DOCS_DIR = path.abspath(f'{PROJECT_ROOT}/docs/doc_blocks')
+
 TARGET_MODELS_DIR = path.abspath(f'{PROJECT_ROOT}/models')
 TARGET_SOURCES_DIR = path.abspath(f'{PROJECT_ROOT}/sources')
 TARGET_PACKAGE_SOURCES_DIR = path.abspath(f'{PROJECT_ROOT}/.export/sources/')
+TARGET_PACKAGE_DOCS_DIR = path.abspath(f'{PROJECT_ROOT}/.export/docs/')
 
 DBT_PROJECT_PATH = path.abspath(f'{PROJECT_ROOT}/dbt_project.yml')
 DBT_PROJECT_NAME = 'bia'
