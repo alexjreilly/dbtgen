@@ -22,11 +22,11 @@ import os
 from dataclasses import dataclass
 import string
 
-from . import params
-from .libs import node
-from .libs.file_handler import read_file
-from .libs.logger import CustomLogger
-from .libs.yaml_handler import read_yaml_file
+from src import params
+from src.libs import node
+from src.libs.file_handler import read_file
+from src.libs.logger import CustomLogger
+from src.libs.yaml_handler import read_yaml_file
 
 logger = CustomLogger()
 counts = {'created': 0, 'skipped': 0}
@@ -212,7 +212,7 @@ def main(args):
                             )
                             params_in_filename = [
                                 tup[1] for tup in string.Formatter().parse(filename) \
-                                    if tup[1] is not None
+                                if tup[1] is not None
                             ]
 
                             if params_in_filename:

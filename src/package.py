@@ -2,10 +2,10 @@ import shutil
 from os import listdir, path, walk
 import pathlib
 
-from . import params
-from .libs import node
-from .libs.logger import CustomLogger
-from .libs.source import SourceFactory
+from src import params
+from src.libs import node
+from src.libs.logger import CustomLogger
+from src.libs.source import SourceFactory
 
 logger = CustomLogger()
 

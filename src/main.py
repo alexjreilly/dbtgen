@@ -1,9 +1,9 @@
 import argparse
 
-from . import clean, model, model_properties, package, source
-from .libs.logger import CustomLogger
-from .libs.profile import default_target
-from .params import DBT_PROFILE_DEFAULT
+from src import clean, model, model_properties, package, source
+from src.libs.logger import CustomLogger
+from src.libs.profile import default_target
+from src.params import DBT_PROFILE_DEFAULT
 
 logger = CustomLogger()
 

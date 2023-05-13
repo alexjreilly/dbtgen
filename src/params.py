@@ -23,10 +23,6 @@ SOURCE_DB_SELECTION_MAPPING = {
     'fivetran': {
         'database': 'qa_fivetran',
         'dbt_database_value': "{{ env_var('DBT_FIVETRAN_DB',  target.name ~ '_FIVETRAN_ODS') }}"
-    },
-    'snowflake': {
-        'database': 'snowflake',
-        'dbt_database_value': 'snowflake'
     }
 }
 MODEL_DB_SELECTION_MAPPING = {

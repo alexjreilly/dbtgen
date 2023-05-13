@@ -18,7 +18,7 @@ The package should be installed when the setting up the virtual environment, but
 installed using the following command:
 
 ```
-pip install -e .dbtgen
+pip install -e .
 ```
 
 ## Commands:

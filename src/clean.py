@@ -1,8 +1,8 @@
 from os import getcwd, remove
 from pathlib import Path
 
-from . import params
-from .libs.logger import CustomLogger
+from src import params
+from src.libs.logger import CustomLogger
 
 logger = CustomLogger()
 

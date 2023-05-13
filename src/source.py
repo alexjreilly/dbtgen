@@ -2,9 +2,9 @@ import sys
 from typing import Union
 import snowflake.connector
 
-from .libs import node, profile, source
-from .libs.logger import CustomLogger
-from .params import SOURCE_DB_SELECTION_MAPPING, TARGET_SOURCES_DIR
+from src.libs import node, profile, source
+from src.libs.logger import CustomLogger
+from src.params import SOURCE_DB_SELECTION_MAPPING, TARGET_SOURCES_DIR
 
 """
     Generated dbt source files
@@ -14,14 +14,14 @@ logger = CustomLogger()
 
 
 def get_snowflake_tables(
-        con,
-        database, 
-        schemas: Union[str, list] = '*',
-        loaded_at_field: str = None,
-        get_freshness: bool = False,
-        use_tables: bool = True,
-        use_views: bool = False
-    ) -> list:
+    con,
+    database,
+    schemas: Union[str, list] = '*',
+    loaded_at_field: str = None,
+    get_freshness: bool = False,
+    use_tables: bool = True,
+    use_views: bool = False
+) -> list:
 
     use_objects = []
 
