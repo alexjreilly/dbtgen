@@ -1,7 +1,7 @@
 from os import path, getcwd
 
 MODULE_DIR = path.dirname(path.realpath(__file__))
-PROJECT_ROOT = path.abspath(f'{MODULE_DIR}/../../')
+PROJECT_ROOT = path.abspath(getcwd())
 
 INPUT_MODELS_DIR = f'{getcwd()}/.dbtgen/'
 TARGET_MODELS_DIR = path.abspath(f'{PROJECT_ROOT}/models')
@@ -9,8 +9,6 @@ TARGET_SOURCES_DIR = path.abspath(f'{PROJECT_ROOT}/sources')
 TARGET_PACKAGE_SOURCES_DIR = path.abspath(f'{PROJECT_ROOT}/.export/sources/')
 
 DBT_PROJECT_PATH = path.abspath(f'{PROJECT_ROOT}/dbt_project.yml')
-DBT_PROJECT_NAME = 'bia'
-DBT_PROFILE_DEFAULT = 'default'
 
 SOURCE_DB_SELECTION_MAPPING = {
     'raw': {

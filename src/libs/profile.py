@@ -1,17 +1,23 @@
 import snowflake.connector
-from dbt.flags import PROFILES_DIR
+from dbt.cli.resolvers import default_profiles_dir
+from dbt.utils import get_profile_from_project
 
-from ..params import DBT_PROFILE_DEFAULT
 from .yaml_handler import read_yaml_file
 
-PROFILES = read_yaml_file(f"{PROFILES_DIR}/profiles.yml")
+PROFILES = read_yaml_file(f"{default_profiles_dir()}/profiles.yml")
 
 
-def default_target(profile_name: str = DBT_PROFILE_DEFAULT):
-    return PROFILES.get(profile_name)['target']
+def get_profile_name_from_current_project():
+    return read_yaml_file('dbt_project.yml')["profile"]
 
 
-def snowflake_connect(profile_name: str = DBT_PROFILE_DEFAULT):
+def get_credentials(profile: str):
+    return get_profile_from_project(
+        PROFILES[profile]
+    )
+
+
+def snowflake_connect(profile_name):
     """
     Reads the dbt profiles.yml stored locally, selects credentials for a given 
     profile and creates a Snowflake connection object
@@ -20,6 +26,6 @@ def snowflake_connect(profile_name: str = DBT_PROFILE_DEFAULT):
     :returns: Snowflake connection object
     """
 
-    sf_creds = PROFILES.get(profile_name)['outputs'][default_target()]
+    sf_creds = get_credentials(profile_name)
     
     return snowflake.connector.connect(**sf_creds)

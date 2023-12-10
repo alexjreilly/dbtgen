@@ -2,8 +2,7 @@ import argparse
 
 from . import clean, model, model_properties, package, source
 from .libs.logger import CustomLogger
-from .libs.profile import default_target
-from .params import DBT_PROFILE_DEFAULT
+from .libs.profile import get_profile_name_from_current_project
 
 logger = CustomLogger()
 
@@ -61,19 +60,11 @@ def build_model_properties_subparser(sub_parsers):
         required=True
     )
     sub_parser.add_argument(
-        "-t",
-        "--target",
-        help="Target environment",
-        type=str,
-        default=default_target(),
-        required=False
-    )
-    sub_parser.add_argument(
         "-p",
         "--profile",
         help="Target dbt profile",
         type=str,
-        default=DBT_PROFILE_DEFAULT,
+        default=get_profile_name_from_current_project(),
         required=False
     )
     sub_parser.add_argument(
@@ -148,19 +139,11 @@ def build_source_subparser(sub_parsers):
         required=False
     )
     sub_parser.add_argument(
-        "-t",
-        "--target",
-        help="Target environment",
-        type=str,
-        default=default_target(),
-        required=False
-    )
-    sub_parser.add_argument(
         "-p",
         "--profile",
         help="Target dbt profile",
         type=str,
-        default=DBT_PROFILE_DEFAULT,
+        default=get_profile_name_from_current_project(),
         required=False
     )
     sub_parser.add_argument(
@@ -228,6 +211,17 @@ def cli():
     build_clean_subparser(subparsers)
 
     args = parser.parse_args()
-    args.func(args)
+
+    if vars(args) == {}:
+        logger.info(
+            f"""Specify one of the following sub-commands.
+                
+            Commands:
+                model,model-properties,source,package,clean
+            """
+        )
+
+    else:
+        args.func(args)
 
     logger.info('Finished')

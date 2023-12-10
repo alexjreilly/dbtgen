@@ -1,6 +1,6 @@
 .DS_Store
 
- # vscode
+# vscode
 .vscode/
 .idea
 .vs
@@ -62,3 +62,5 @@ coverage.xml
 
 logs/
 target/
+
+**/.dbtgen/**
