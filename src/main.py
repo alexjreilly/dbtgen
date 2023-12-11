@@ -1,10 +1,20 @@
 import argparse
 
-from . import clean, model, model_properties, package, source
+from . import clean, model, model_properties, package, source, init
 from .libs.logger import CustomLogger
 from .libs.profile import get_profile_name_from_current_project
 
 logger = CustomLogger()
+
+
+def build_init_subparser(sub_parsers):
+
+    sub_parser = sub_parsers.add_parser(
+        "init", 
+        help="Initialize dbtgen by creating .dbgten sub-directory"
+    )
+
+    sub_parser.set_defaults(func=init.main)
 
 
 def build_model_subparser(sub_parsers):
@@ -204,6 +214,7 @@ def cli():
     parser = argparse.ArgumentParser(prog='dbtgen')
     subparsers = parser.add_subparsers(title='Available actions / sub-commands')
 
+    build_init_subparser(subparsers)
     build_model_subparser(subparsers)
 
     # TODO: Fix sub-commands
