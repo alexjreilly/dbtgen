@@ -205,9 +205,12 @@ def cli():
     subparsers = parser.add_subparsers(title='Available actions / sub-commands')
 
     build_model_subparser(subparsers)
-    build_model_properties_subparser(subparsers)
-    build_source_subparser(subparsers)
-    build_package_subparser(subparsers)
+
+    # TODO: Fix sub-commands
+    # build_model_properties_subparser(subparsers)
+    # build_source_subparser(subparsers)
+    # build_package_subparser(subparsers)
+
     build_clean_subparser(subparsers)
 
     args = parser.parse_args()

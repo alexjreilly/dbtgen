@@ -1,18 +1,17 @@
 # dbtgen
 
-NOTE: currently only working with dbt-snowflake 
-
 ## Contents
 
 - [Install](#commands)
 - [Usage](#usage)
 - [Commands](#commands)
   - [`model`](#model)
-  - [`model-properties`](#model-properties)
-  - [`source`](#source) 
-  - [`package`](#package)
+  - [`model-properties`](#model-properties) [*]
+  - [`source`](#source) [*]
+  - [`package`](#package) [*]
   - [`clean`](#clean)
 
+[*] These sub-commands are not working as expected and have been temporarily disabled
 
 ## Install:
 
