@@ -3,7 +3,7 @@ import sys
 from typing import Tuple
 import snowflake.connector
 import yaml
-from dbt.utils import deep_merge
+# from dbt.utils import deep_merge
 
 from .libs import node, profile
 from .libs.file_handler import list_files_in_dir
